@@ -1,20 +1,22 @@
 <script>
   import gosit from "gosit";
   let hasil = [];
+  let banyak = 0;
   async function ambil_data() {
     let inputData = await gosit(
       "1AmwL4HHSCuJiX7Lykp7i6dyWG4GgijfI-2X8qAKfU6M",
       "Form Responses 1"
     );
+    banyak = inputData.length;
 
     // Objek untuk menyimpan hasil transformasi
     var transformedData = [
       {
-        title: "ODOP Angkatan",
+        title: "Pilihan",
         data: [],
       },
       {
-        title: "Pilihan",
+        title: "ODOP Angkatan",
         data: [],
       },
     ];
@@ -38,17 +40,17 @@
       pilihan[pemimpin] = (pilihan[pemimpin] || 0) + 1;
     });
 
-    // Transformasi data angkatan
+    // Transformasi data pilihan
     for (var angkatan in odopAngkatan) {
-      transformedData[0].data.push({
+      transformedData[1].data.push({
         title: angkatan,
         quantity: odopAngkatan[angkatan],
       });
     }
 
-    // Transformasi data pilihan
+    // Transformasi data angkatan
     for (var pemimpin in pilihan) {
-      transformedData[1].data.push({
+      transformedData[0].data.push({
         title: pemimpin.split(" ")[0],
         quantity: pilihan[pemimpin],
       });
@@ -61,7 +63,34 @@
   ambil_data();
 </script>
 
-<pre>{JSON.stringify(hasil, null, 2)}</pre>
+<div class="px-[10%] py-3 bg-gray-200">
+  <button class="btn mb-3">
+    <div class="badge">{banyak}</div>
+    Pemilih
+  </button>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    {#each hasil as x}
+      <div class="card w-full bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">{x.title}</h2>
+          <div class="overflow-x-auto">
+            <table class="table">
+              <tbody>
+                <!-- row 1 -->
+                {#each x.data as y}
+                  <tr>
+                    <th>{y.title}</th>
+                    <td>{y.quantity} Pemilih</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {/each}
+  </div>
+</div>
 
 <svelte:head>
   <title>ODOP Fire 🔥</title>
