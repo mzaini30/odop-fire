@@ -89,10 +89,21 @@
 </script>
 
 <div class="px-[10%] py-3 bg-gray-200">
-  <button class="btn mb-3">
-    <div class="badge">{banyak}</div>
-    Pemilih
-  </button>
+  <div class="flex flex-col sm:flex-row gap-3 mb-3">
+    <span>
+      <button class="btn">
+        <div class="badge">{banyak}</div>
+        Pemilih
+      </button>
+    </span>
+    <span>
+      <a
+        href="https://tokopedia.link/CORWQfN9PFb"
+        class="btn btn-active btn-secondary"
+        >Kuasai Cara Sukses Berorganisasi 🔥</a
+      >
+    </span>
+  </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
     {#each hasil as x}
       <div class="card w-full bg-base-100 shadow-xl">
