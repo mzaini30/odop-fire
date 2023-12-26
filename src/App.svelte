@@ -56,6 +56,31 @@
       });
     }
 
+    // kode sebelumnya
+
+    // Mencari nilai maksimum untuk ODOP Angkatan
+    var maxAngkatan = Math.max(
+      ...transformedData[0].data.map((item) => item.quantity)
+    );
+
+    // Menandai data angkatan dengan kuantitas paling banyak
+    transformedData[0].data.forEach((item) => {
+      item.highlight = item.quantity === maxAngkatan;
+    });
+
+    // Mencari nilai maksimum untuk Pilihan
+    var maxPilihan = Math.max(
+      ...transformedData[1].data.map((item) => item.quantity)
+    );
+
+    // Menandai data pilihan dengan kuantitas paling banyak
+    transformedData[1].data.forEach((item) => {
+      item.highlight = item.quantity === maxPilihan;
+    });
+
+    // Menampilkan hasil transformasi dengan penyorotan
+    console.log(transformedData);
+
     // Menampilkan hasil transformasi
     // console.log(transformedData);
     hasil = transformedData;
@@ -78,7 +103,7 @@
               <tbody>
                 <!-- row 1 -->
                 {#each x.data as y}
-                  <tr>
+                  <tr class={y.highlight ? "bg-base-200" : null}>
                     <th>{y.title}</th>
                     <td>{y.quantity} Pemilih</td>
                   </tr>
